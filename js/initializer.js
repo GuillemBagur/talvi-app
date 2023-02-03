@@ -1,0 +1,1 @@
+const navEl = document.getElementById("nav");
