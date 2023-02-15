@@ -106,9 +106,9 @@ const processTickets = async (text) => {
         const wordsWithSameLength = words[wordLen];
         if(wordsWithSameLength.includes(word)) return word;
         let wordsRating = [];
-        for(let correctWord of wordsWithSameLength) {
-            const distance = levenshteinDistance(word, correctWord)/wordLen;
-            const res = {word: correctWord, distance: distance};
+        for(let cWord of wordsWithSameLength) {
+            const distance = levenshteinDistance(word, cWord)/wordLen;
+            const res = {word: cWord, distance: distance};
             wordsRating.push(res);
         }
     
@@ -122,7 +122,6 @@ const processTickets = async (text) => {
     
     const normalizeSentence = text => {
         let allWords = text.split(/\s/).filter(word => word.length);
-        allWords = allWords.slice(0, 60)
         const correctedWords = allWords.map(correctWord);
         return correctedWords;
     }
@@ -194,7 +193,8 @@ const processTickets = async (text) => {
         for(let row of ticketRows) {
             if(!row) continue;
             if(!row.length) continue;
-            for(let [condition, action] of actionPerRow.entries()) {
+            row = removeAccents(row);
+                for(let [condition, action] of actionPerRow.entries()) {
                 if(condition(row)) {
                     action(row);
                     break;

@@ -7,9 +7,12 @@ const keys = {
 
 const regex = {
     nif: /[ABCDEFGHJKLMNPQRSUVW][- ]?\d{7}[0-9A-J]/i,
-    startProducts: /[(import)(pvp)]/gim,
+    socialName: /(S.?L.?|S.?A.?|S.?COOP.?)$/i,
+    startProducts: /(import|articulo|descripcio|\-{3,})/gim,
+    //startProducts: /[(import)(pvp)\-{3,}]/gim,
+    //startProducts: /\-{3,}/gim,
     stopProducts: /total/gim,
-    numWComma: /^\d{1,}\,\d{1,2}$/i,
+    numWComma: /^\d{1,}\,\d{1,4}$/i,
     cleanText: /[a-z0-9,.\s]/gi
 }
 
