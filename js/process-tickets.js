@@ -156,20 +156,29 @@ const processTickets = async (text) => {
         return prevRow;
     }
 
-    const saveShopNifName = (row, ticketRows) => {
+    const saveShopNif = (row) => {
         const nifRegex = regex.nif;
         if(shop.nif) return;
         const [word] = nifRegex.exec(row);
         shop.nif = word;
-        const shopName = getPrevRow(row, ticketRows);
-        const cleanShopName = shopName.match(regex.cleanText).join("").replace(/^\s*/g, "").replace(/\s*$/g, "");
-        shop.name = cleanShopName;
+    }
+
+    const cleanShopName = shopName => {
+        const correctType = shopName.replace(/SI$/i, "SL").replace(/S4$/i, "SA");
+    }
+
+    const saveShopName = (row) => {
+        const socialNameRegex = regex.socialName;
+        if(shop.name) return;
+        console.log(row, )
+        const [word] = socialNameRegex.exec(row);
+        shop.name = cleanShopName(word);
     }
     
     const understandTicketInRows = ticketRows => {
         const nifRegex = regex.nif;
         // Quan surt la paraula "Importe" a una fila, comencen els productes
-        // Quan es detecta un NIF (abans de l'"importe"), s'extreu i es considera la fila anterior com a nom fiscal
+        const socialNameRegex = regex.socialName;
     
         // Paraula "Import", molt útil perquè marca la fila on començar a capturar productes
         const startProducts = regex.startProducts;
@@ -185,7 +194,8 @@ const processTickets = async (text) => {
                 understandProduct(row);
             }],
     
-            [row => nifRegex.test(row), row => saveShopNifName(row, ticketRows)],
+            [row => nifRegex.test(row), row => saveShopNif(row)],
+            [row => socialNameRegex.test(row), row => saveShopName(row)],
 
         ]);
     
@@ -194,7 +204,8 @@ const processTickets = async (text) => {
             if(!row) continue;
             if(!row.length) continue;
             row = removeAccents(row);
-                for(let [condition, action] of actionPerRow.entries()) {
+            console.log(row);
+            for(let [condition, action] of actionPerRow.entries()) {
                 if(condition(row)) {
                     action(row);
                     break;
