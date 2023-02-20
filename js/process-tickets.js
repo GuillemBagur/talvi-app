@@ -150,29 +150,39 @@ const processTickets = async (text) => {
         ticket.products.push(product);
     }
 
-    const getPrevRow = (row, ticketRows) => {
-        const currentIndex = ticketRows.indexOf(row);
-        const prevRow = ticketRows[currentIndex-1] || "";
-        return prevRow;
+
+    const cleanShopNif = nif => {
+        return nif.replace(/[\- ]/gi, "");
     }
+
 
     const saveShopNif = (row) => {
         const nifRegex = regex.nif;
         if(shop.nif) return;
         const [word] = nifRegex.exec(row);
-        shop.nif = word;
+        shop.nif = cleanShopNif(word);
     }
 
-    const cleanShopName = shopName => {
-        const correctType = shopName.replace(/SI$/i, "SL").replace(/S4$/i, "SA");
+    // Removes previus spaces, duplicated spaces, wrong company types (like SI (OCR got confused by SL))
+    // Adds the company type in the format below: (companyName), (type -without dots)
+    const cleanShopName = (shopName, companyType) => {
+        const companyTypeRegex = new RegExp(`[\.\, ]{1,}${companyType}$`, "i");
+        const correctCompanyType = shopName.replace(/SI$/i, "SL").replace(/S4$/i, "SA").replace(/^\s*/, "").replace(companyTypeRegex, (match) => {
+            return `, ${match.substr(1).replace(/\./g, "").replace(/ *$/g, "")}`;
+        });
+    
+        const result = correctCompanyType.replace(/(\s){2,}/, " ").toUpperCase();
+    
+        return result;
     }
+    
 
     const saveShopName = (row) => {
         const socialNameRegex = regex.socialName;
         if(shop.name) return;
-        console.log(row, )
-        const [word] = socialNameRegex.exec(row);
-        shop.name = cleanShopName(word);
+        console.log(row, socialNameRegex.exec(row));
+        const [word, companyType] = socialNameRegex.exec(row);
+        shop.name = cleanShopName(word, companyType);
     }
     
     const understandTicketInRows = ticketRows => {
@@ -228,3 +238,4 @@ const processTickets = async (text) => {
 }
 
 //processTickets();
+

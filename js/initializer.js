@@ -7,7 +7,7 @@ const keys = {
 
 const regex = {
     nif: /[ABCDEFGHJKLMNPQRSUVW][- ]?\d{7}[0-9A-J]/i,
-    socialName: /[A-Z0-9\s]*[\s\,]{1,}(S.?L.?|S.?I.?|S.?A.?|S.?4.?|S.?COOP.?)/i,
+    socialName: /[A-Z0-9 ]*[ \,\.]{1,}(S.?L.?|S.?I.?|S.?A.?|S.?4.?|S.?COOP.?)/i,
     startProducts: /(import|articulo|descripcio|\-{3,})/gim,
     //startProducts: /[(import)(pvp)\-{3,}]/gim,
     //startProducts: /\-{3,}/gim,
