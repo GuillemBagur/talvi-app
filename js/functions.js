@@ -40,4 +40,25 @@ const isNumeric = num => {
 
 const removeAccents = (str) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-} 
+}
+
+const fetchStats = async (userID) => {
+  try {
+    if(!userID) return undefined;
+    const res = await fetch(`${serverURL}/purchases/${userID}`);
+    const userPurchases = await res.json();
+    if(!userPurchases) return undefined;
+    const currentDate = new Date();
+    const purchases = {
+      lastWeek: userPurchases.filter(purchase => purchase.date > currentDate-7),
+      lastMonth: userPurchases.filter(purchase => purchase.date.getFullYear() === currentDate.getFullYear() && purchase.date.getMonth() === currentDate.getMonth()),
+      lastYear: userPurchases.filter(purchase => purchase.date.getFullYear() === currentDate.getFullYear())
+    };
+
+    return purchases;
+  } catch(err) {
+    console.error(err);
+  }
+  
+
+}
