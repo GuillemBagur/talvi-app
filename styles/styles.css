@@ -1,220 +1,324 @@
 /* Variables amb els colors */
 
 * {
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-input[type=file] {
-    cursor: pointer;
+input[type="file"] {
+  cursor: pointer;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .take-picture-input {
-    position: absolute;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
 .nav {
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    box-sizing: border-box;
-    padding: 1rem;
-    background-color: white;
-    box-shadow: 0 -10px 20px 2px rgba(10, 10, 10, .3);
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 -10px 20px 2px rgba(10, 10, 10, 0.3);
 }
 
 .nav__nav-links {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
 }
 
 .nav__link {
-    display:  flex;
-    font-size: 1.8rem;
-    aspect-ratio: 1 / 1;
-    padding: .8rem;
+  display: flex;
+  font-size: 1.8rem;
+  aspect-ratio: 1 / 1;
+  padding: 0.8rem;
 }
 
 .nav__link--middle {
-    transform: translateY(-70%);
-    padding: 1rem;
-    background-color: green;
-    border-radius: 50%;
-    box-shadow: 0 10px 20px 2px rgba(0, 255, 0, .8);
+  transform: translateY(-70%);
+  padding: 1rem;
+  background-color: green;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px 2px rgba(0, 255, 0, 0.8);
 }
-
 
 .nav__icon {
-    color: green;
+  color: green;
 }
 
-
 .nav__link--middle .nav__icon {
-    color: white;
+  color: white;
 }
 
 .city-bar {
-    padding: .5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    margin: auto;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: auto;
 }
 
 .location-wrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .location {
-    display: inline-block;
-    margin-top: .5rem;
-    max-width: 60vw;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: inline-block;
+  margin-top: 0.5rem;
+  max-width: 60vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .icon--scaley {
-    display: inline-block;
-    transform: scaleY(1.07);
+  display: inline-block;
+  transform: scaleY(1.07);
 }
 
 .icon--w-text {
-    display: inline-block;
-    margin-right: .5rem;
+  display: inline-block;
+  margin-right: 0.5rem;
 }
 
 .icon--green {
-    color: green;
+  color: green;
 }
 
 .notifications-button {
-    position: absolute;
-    top: .7rem;
-    right: 1.5rem;
-    background-color: transparent;
-    border: none;
+  position: absolute;
+  top: 0.7rem;
+  right: 1.5rem;
+  background-color: transparent;
+  border: none;
 }
 
 .notifications-button--notifs::after {
-    content: "";
-    position: absolute;
-    aspect-ratio: 1 / 1;
-    height: 7px;
-    top: 10%;
-    right: 10%;
-    border-radius: 50%;
-    background-color: green;
+  content: "";
+  position: absolute;
+  aspect-ratio: 1 / 1;
+  height: 7px;
+  top: 10%;
+  right: 10%;
+  border-radius: 50%;
+  background-color: green;
 }
 
 .section-card {
-    background-image: url("../imgs/fondo\ tarjeta.jpg");
-    background-position: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 1rem;
+  background-image: url("../imgs/fondo\ tarjeta.jpg");
+  background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1rem;
 }
 
 .card {
-    display: block;
-    position: relative;
-    margin: auto;
-    width: 80%;
-    aspect-ratio: 7 / 4;
-    background-color: green;
-    border-radius: 10px;
-    padding: 1% 3%;
-    box-sizing: border-box;
+  display: block;
+  position: relative;
+  margin: auto;
+  width: 80%;
+  aspect-ratio: 7 / 4;
+  background-color: green;
+  border-radius: 10px;
+  padding: 1% 3%;
+  box-sizing: border-box;
 }
 
 .card::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 95%;
-    aspect-ratio: 1 / 1;
-    background-image: linear-gradient(90deg, rgba(0, 0, 0,0), yellow);
-    opacity: .5;
-    border-radius: 50%;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 95%;
+  aspect-ratio: 1 / 1;
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0), yellow);
+  opacity: 0.5;
+  border-radius: 50%;
 }
 
 .card__title {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
 }
 
 .card__owner {
-    position: absolute;
-    bottom: 10%;
-    font-size: 1rem;
-    color: white;
+  position: absolute;
+  bottom: 10%;
+  font-size: 1rem;
+  color: white;
 }
 
 .card__logo {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 95%;
-    aspect-ratio: 1 / 1;
-    opacity: .3;
-    filter: brightness(5);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 95%;
+  aspect-ratio: 1 / 1;
+  opacity: 0.3;
+  filter: brightness(5);
 }
 
 .card__qr-wrapper {
-    position: absolute;
-    right: 0;
-    left: 12%;
-    top: 45%;
-    padding: .2rem;
-    border-radius: 5px;
-    transform: translateY(-50%);
-    width: 13vw;
-    background-color: white;
-    aspect-ratio: 1 / 1;
-    opacity: .9;
+  position: absolute;
+  right: 0;
+  left: 12%;
+  top: 45%;
+  padding: 0.2rem;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  width: 13vw;
+  background-color: white;
+  aspect-ratio: 1 / 1;
+  opacity: 0.9;
 }
 
 .card__qr {
-    position: relative;
-    width: 100%;
-    pointer-events: none;
+  position: relative;
+  width: 100%;
+  pointer-events: none;
 }
 
 .search-bar {
-    display: block;
-    width: 90%;
-    margin: auto;
-    padding: 1rem;
-    outline: none;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 5px 20px 1px rgba(0, 0, 0, .3);
-    transform: translateY(-20%);
+  display: block;
+  width: 90%;
+  margin: auto;
+  padding: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 5px 20px 1px rgba(0, 0, 0, 0.3);
+  transform: translateY(-20%);
+}
+
+.main-content {
+  padding: 2rem;
+}
+
+.purchases-info {
+  min-height: 7rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.avatar-container {
+  display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 2rem,
+}
+
+.avatar {
+	background-color: rgba(10, 10, 10, .2);
+	display: block;
+	width: 60%;
+	padding: 1rem;
+	border-radius: 10px;
+	margin-top: 3rem;
+}
+
+.avatar__img {
+	display: block;
+	height: 7rem;
+	aspect-ratio: 1 / 1;
+  border-radius: 50%;
+	pointer-events: none;
+	margin: auto;
+}
+
+.avatar__name {
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.avatar__id {
+	font-size: .8rem;
+	opacity: .8;
+	text-align: center;
+}
+
+.options-list {
+	position: relative;
+	display: block;
+	margin: auto;
+	padding: 2rem;
+	width: 70%;
+	font-size: 1.2rem;
+}
+
+.section-title {
+	margin-bottom: 1rem;
+}
+
+.option {
+	margin-bottom: .4rem;
+}
+
+.option a {
+	font-weight: bold;
+	color: green;
+}
+
+.tickets-wrapper {
+  padding-bottom: 5rem;
+}
+
+.ticket {
+  margin-bottom: 2rem;
+  background-color: rgba(100, 100, 100, .3);
+  padding: 1rem;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.ticket__shop {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: .2rem;
+}
+
+.ticket__date {
+  margin-bottom: .5rem;
+  opacity: .7;
+}
+
+.ticket__products {
+  transform: translateX(1.2rem)
+}
+
+.ticket__total {
+  margin-top: .5rem;
+  opacity: .9;
 }

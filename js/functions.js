@@ -1,46 +1,75 @@
-const sendForm = id => {
+Date.prototype.getWeek = function () {
+  var onejan = new Date(this.getFullYear(), 0, 1);
+  var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+  var dayOfYear = (today - onejan + 86400000) / 86400000;
+  return Math.ceil(dayOfYear / 7);
+};
+
+const sendForm = (id) => {
   const form = document.getElementById(id);
   form.submit();
-}
+};
 
-const loadFile = async path => {
-    const file = await fetch(path, 
-      {headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }});
-    const json = await file.json();
-    return json;
-}
+const loadFile = async (path) => {
+  console.log(path);
+  const file = await fetch(path, {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  const json = await file.json();
+  return json;
+};
 
-const loadWords = async () => await loadFile("data/words.json");
-
-
-const isNumeric = num => {
+const isNumeric = (num) => {
   return !isNaN(num);
-}
+};
 
 const removeAccents = (str) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
+};
 
 const fetchStats = async (userID) => {
   try {
-    if(!userID) return undefined;
-    const res = await loadFile(`${serverURL}/purchases/${userID}`);
-    const userPurchases = await res.json();
-    if(!userPurchases) return undefined;
+    if (!userID) return undefined;
+    const userPurchases = await loadFile(`${serverURL}/purchases/${userID}`);
+    if (!userPurchases) return undefined;
     const currentDate = new Date();
     const purchases = {
-      lastWeek: userPurchases.filter(purchase => purchase.date > currentDate-7),
-      lastMonth: userPurchases.filter(purchase => purchase.date.getFullYear() === currentDate.getFullYear() && purchase.date.getMonth() === currentDate.getMonth()),
-      lastYear: userPurchases.filter(purchase => purchase.date.getFullYear() === currentDate.getFullYear())
+      lastweek: userPurchases.filter((purchase) => {
+        const purchaseDate = new Date(purchase.createdAt);
+        return (
+          purchaseDate.getFullYear() === currentDate.getFullYear() &&
+          purchaseDate.getWeek() === currentDate.getWeek()
+        );
+      }),
+      lastmonth: userPurchases.filter((purchase) => {
+        const purchaseDate = new Date(purchase.createdAt);
+        return (
+          purchaseDate.getFullYear() === currentDate.getFullYear() &&
+          purchaseDate.getMonth() === currentDate.getMonth()
+        );
+      }),
+
+      all: userPurchases,
     };
 
     return purchases;
-  } catch(err) {
+  } catch (err) {
     console.error(err);
   }
-  
+};
 
-}
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const yyyy = date.getFullYear();
+  let mm = date.getMonth() + 1; // Months start at 0!
+  let dd = date.getDate();
+
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+
+  const formattedDate = dd + "/" + mm + "/" + yyyy;
+  return formattedDate;
+};

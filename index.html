@@ -29,11 +29,20 @@
         </section>
         <input type="text" placeholder="Busca" class="search-bar">
 
-        <section class="section-statistics">
-            <h2>Les teves estadístiques</h2>
-            <h3>Compres la darrera setmana</h3>
-            <div class="purchases-info purchases-info--last-week" data-role="purchases-info" data-period="last-week"></div>
-        </section>
+        <div class="main-content">
+            <section class="section-statistics">
+                <h2 class="section-title">Les teves estadístiques</h2>
+                <div class="stats">
+                    <h3>Compres la darrera setmana</h3>
+                    <div class="purchases-info" data-role="purchases-info" data-period="lastweek"></div>
+                </div>
+
+                <div class="stats">
+                    <h3>Compres el darrer mes</h3>
+                    <div class="purchases-info" data-role="purchases-info" data-period="lastmonth"></div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <nav id="nav" class="nav"></nav>
@@ -42,5 +51,6 @@
     <script src="js/functions.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/location.js"></script>
+    <script src="js/stats.js"></script>
 </body>
 </html>
