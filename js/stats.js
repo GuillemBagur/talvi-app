@@ -1,11 +1,14 @@
 const drawStats = (selector, periods, stats, fields) => {
-	console.log(stats);
+  console.log(stats);
   for (let period of periods) {
-		const element = document.querySelector(`[data-role="${selector}"][data-period="${period}"]`);
+    const element = document.querySelector(
+      `[data-role="${selector}"][data-period="${period}"]`
+    );
     element.innerHTML = "";
     let toRender = "";
     for (let field of Object.keys(fields)) {
-			const periodStats = stats[period];
+      const periodStats = stats[period];
+      console.log(periodStats);
       const func = fields[field];
       const stat = func(periodStats);
       const result = `<h3>${field}</h3>
@@ -21,28 +24,26 @@ const renderStats = async () => {
   const stats = await fetchStats("123");
   drawStats("purchases-info", ["lastweek", "lastmonth"], stats, {
     "Total gastat": (data) => {
-			const sum = data.reduce((a, b) => {
-				if(!a.total && !b.total) return 0;
-				if(!a.total) return b.total;
-				if(!b.total) return a.total;
-				return a.total+b.total;
-			}, 0);
-			if(isNaN(sum)) return data[0].total;
-			return sum;
-		},
+      const sum = data.reduce((a, b) => {
+        if (isNaN(a.total)) return b.total;
+        if (isNaN(b.total)) return a.total;
+        return a.total + b.total;
+      });
+      if (isNaN(sum)) return data[0].total;
+      return sum;
+    },
     "Número de compres": (data) => {
-			return data.length;
-		},
-		"Compra més gran": (data) => {
-			const biggestPurchase = data.sort((a, b) => b.total-a.total)[0];
-			if(!biggestPurchase) return "";
-			if(!biggestPurchase.shop) return "";
-			return biggestPurchase.shop.name;
-		}
+      return data.length;
+    },
+    "Compra més gran": (data) => {
+      const biggestPurchase = data.sort((a, b) => b.total - a.total)[0];
+      if (!biggestPurchase) return "";
+      if (!biggestPurchase.shop) return "";
+      return biggestPurchase.shop.name || "No disponible";
+    },
   });
 };
 
-
 document.addEventListener("DOMContentLoaded", async () => {
-	renderStats();
+  renderStats();
 });

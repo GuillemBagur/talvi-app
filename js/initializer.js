@@ -4,4 +4,4 @@ const keys = {
     ocr: "bWNAku3qXipL0kM4bhpGoDrcfS0K0P9t"
 };
 
-const serverURL = "https://talvi.cyclic.app" || "http://localhost:3003";
+const serverURL = "http://localhost:3003"; // "https://talvi.cyclic.app" || "http://talvi.gbm.digital:3003";
