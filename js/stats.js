@@ -24,11 +24,7 @@ const renderStats = async () => {
   const stats = await fetchStats("123");
   drawStats("purchases-info", ["lastweek", "lastmonth"], stats, {
     "Total gastat": (data) => {
-      const sum = data.reduce((a, b) => {
-        if (isNaN(a.total)) return b.total;
-        if (isNaN(b.total)) return a.total;
-        return a.total + b.total;
-      });
+      const sum = data.reduce((a, b) => a.total + b.total);
       if (isNaN(sum)) return data[0].total;
       return sum;
     },
