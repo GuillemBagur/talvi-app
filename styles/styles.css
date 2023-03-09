@@ -7,6 +7,10 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+  padding-bottom: 4rem;
+}
+
 input[type="file"] {
   cursor: pointer;
 }
