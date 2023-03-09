@@ -11,7 +11,7 @@ const renderTickets = (tickets) => {
 			<h4 class="ticket__date">${formatDate(ticket.createdAt)}</h4>
 			<ul class="ticket__products">
 			${ticket.products
-        .map((product) => `<li class="ticket__product">${product.name}</li>`)
+        .map((product) => `<li class="ticket__product">${product.name} (${product.price})</li>`)
         .join("")}
 			</ul>
 
