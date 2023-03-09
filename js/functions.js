@@ -33,8 +33,9 @@ const removeAccents = (str) => {
 const fetchStats = async (userID) => {
   try {
     if (!userID) return undefined;
-    const userPurchases = await loadFile(`${serverURL}/purchases/${userID}`);
+    let userPurchases = await loadFile(`${serverURL}/purchases/${userID}`);
     if (!userPurchases) return undefined;
+    userPurchases = userPurchases.reverse();
     const currentDate = new Date();
     const purchases = {
       lastweek: userPurchases.filter((purchase) => {
